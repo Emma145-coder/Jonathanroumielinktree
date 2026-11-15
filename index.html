@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Roumie | Linktree</title>
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77);
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Top Action Icons (Share/More) */
+        .top-actions {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0.5rem 1.5rem 0.5rem;
+        }
+
+        .top-btn {
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: background 0.2s;
+        }
+
+        .top-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .profile-handle {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Social Icons Row */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-link {
+            color: #ffffff;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .social-icon-link:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Link Buttons */
+        .links-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .link-button {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+            padding: 0.9rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .link-button:hover {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .link-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .link-thumb {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .link-menu {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Branding Button */
+        .brand-badge-container {
+            margin-bottom: 2rem;
+        }
+
+        .brand-pill {
+            background: #ffffff;
+            color: #000000;
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .brand-pill:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin: 0 4px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal for Secure Private Message */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 90%;
+            max-width: 420px;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            text-align: left;
+            position: relative;
+            animation: modalSlideUp 0.3s ease;
+        }
+
+        @keyframes modalSlideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-body p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-value {
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .contact-value:hover {
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Action Buttons -->
+        <div class="top-actions">
+            <button class="top-btn" title="Settings"><i class="fa-solid fa-asterisk"></i></button>
+            <button class="top-btn" title="Share"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+        </div>
+
+        <!-- Profile Information -->
+        <div class="profile-section">
+            <div class="avatar-container">
+                <!-- Profile picture using https://i.ibb.co/35tyDHjk/IMG-7318.jpg -->
+                <img src="https://i.ibb.co/35tyDHjk/IMG-7318.jpg" alt="Jonathan Roumie">
+            </div>
+            <div class="profile-name-row">
+                <span class="profile-name">Jonathan Roumie</span>
+            </div>
+            <div class="profile-handle">IG / FB: @JonathanRoumieOfficial</div>
+
+            <!-- Official Social Media Icons with working X SVG icon -->
+            <div class="social-icons">
+                <a href="https://www.instagram.com/jonathanroumieofficial" target="_blank" class="social-icon-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@jonathanroumie" target="_blank" class="social-icon-link" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@jonathanroumie_official" target="_blank" class="social-icon-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/JonathanRoumieOfficial" target="_blank" class="social-icon-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.threads.net/@jonathanroumieofficial" target="_blank" class="social-icon-link" title="Threads"><i class="fa-solid fa-at"></i></a>
+                <a href="https://x.com/JonathanRoumie" target="_blank" class="social-icon-link" title="X (Twitter)">
+                    <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Links List -->
+        <div class="links-list">
+            <!-- Hallow Link -->
+            <a href="https://hallow.com" target="_blank" class="link-button">
+                <div class="link-left">
+                    <img src="https://i.ibb.co/h1Vv4s6d/IMG-7316.jpg" alt="Hallow Icon" class="link-thumb">
+                    <span>Hallow: Prayer & Meditation</span>
+                </div>
+                <i class="fa-solid fa-ellipsis-vertical link-menu"></i>
+            </a>
+
+            <!-- Secure Private Message Link (Triggers Modal) -->
+            <div class="link-button" id="openMessageModal">
+                <div class="link-left">
+                    <img src="https://i.ibb.co/gM5D9Kjq/IMG-7317.jpg" alt="Secure Message Icon" class="link-thumb">
+                    <span>Secure Private Message</span>
+                </div>
+                <i class="fa-solid fa-ellipsis-vertical link-menu"></i>
+            </div>
+        </div>
+
+        <!-- Linktree Branding Button -->
+        <div class="brand-badge-container">
+            <a href="https://linktr.ee" target="_blank" class="brand-pill">
+                <i class="fa-solid fa-bolt"></i> Get your own Linktree
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <a href="#">Cookie Preferences</a> • 
+            <a href="#">Report</a> • 
+            <a href="#">Privacy</a> • 
+            <a href="#">Explore</a> • 
+            <a href="#">About this account</a> • 
+            <a href="#">More from Linktree</a>
+        </div>
+    </footer>
+
+    <!-- Secure Private Message Modal -->
+    <div class="modal-overlay" id="messageModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeMessageModal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-title">
+                <i class="fa-solid fa-lock" style="color: #38bdf8;"></i> Secure Private Contact
+            </div>
+            <div class="modal-body">
+                <p>Reach out securely through the verified contact channels below:</p>
+                
+                <div class="contact-item">
+                    <span class="contact-label">Phone Number</span>
+                    <a href="tel:7162320946" class="contact-value">716-232-0946</a>
+                </div>
+
+                <div class="contact-item">
+                    <span class="contact-label">Email Address</span>
+                    <a href="mailto:jonathangeorgeroumie78@gmail.com" class="contact-value">jonathangeorgeroumie78@gmail.com</a>
+                </div>
+
+                <div class="contact-item">
+                    <span class="contact-label">Telegram</span>
+                    <a href="https://t.me/jrnewtelegram" target="_blank" class="contact-value">https://t.me/jrnewtelegram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const openModalBtn = document.getElementById('openMessageModal');
+        const closeModalBtn = document.getElementById('closeMessageModal');
+        const modalOverlay = document.getElementById('messageModal');
+
+        openModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
